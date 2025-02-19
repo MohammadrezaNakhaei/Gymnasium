@@ -527,6 +527,9 @@ class Wrapper(
             "Can't access `_np_random` of a wrapper, use `.unwrapped._np_random` or `.np_random`."
         )
 
+    def __getattr__(self, name):
+        return getattr(self.env, name)
+
 
 class ObservationWrapper(Wrapper[WrapperObsType, ActType, ObsType, ActType]):
     """Modify observations from :meth:`Env.reset` and :meth:`Env.step` using :meth:`observation` function.
